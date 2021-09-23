@@ -13,6 +13,7 @@
 import SUAVE
 from SUAVE.Input_Output.OpenVSP.vsp_read_fuselage import vsp_read_fuselage
 from SUAVE.Input_Output.OpenVSP.vsp_read_wing import vsp_read_wing
+from SUAVE.Input_Output.OpenVSP.vsp_read_prop import vsp_read_prop
 
 import vsp as vsp
 
@@ -167,6 +168,11 @@ def vsp_read(tag, units_type='SI'):
 	
 	for wing_id in vsp_wings:
 		wing = vsp_read_wing(wing_id, units_type)
-		vehicle.append_component(wing)		
+		vehicle.append_component(wing)	 
+	
+	for prop_id in vsp_wings:
+		prop       = vsp_read_prop(prop_id, units_type)
+		propellers = vehicle.networks.propellers
+		propellers.append_component(prop)		
 	
 	return vehicle
